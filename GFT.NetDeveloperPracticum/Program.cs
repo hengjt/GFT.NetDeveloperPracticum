@@ -11,7 +11,7 @@ namespace GFT.NetDeveloperPracticum
     {
         private static void Main(string[] args)
         {
-            var userAnswer = true;
+            var userAnswer = true; 
             do
             {
                 var input = GetInput();
