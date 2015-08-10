@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GFT.NetDeveloperPracticum", "GFT.NetDeveloperPracticum\GFT.NetDeveloperPracticum.csproj", "{7BEF77F6-6E0B-4909-8B21-434899A50A53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{FD2C1179-F6EB-4B95-8737-1BFE499B8A8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{82622879-D661-4C95-A542-C170C25C4C94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GFT.NetDeveloperPracticum.Model", "GFT.NetDeveloperPracticum.Model\GFT.NetDeveloperPracticum.Model.csproj", "{1899AA65-3BD8-4B74-8A35-C4F6D341FF61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{CE5CD0A9-95AC-455B-8E3C-CAF2084E5874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GFT.NetDeveloperPracticum.Tests", "GFT.NetDeveloperPracticum.Tests\GFT.NetDeveloperPracticum.Tests.csproj", "{A42D447A-0924-45E8-B473-B083E36549F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BEF77F6-6E0B-4909-8B21-434899A50A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BEF77F6-6E0B-4909-8B21-434899A50A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BEF77F6-6E0B-4909-8B21-434899A50A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BEF77F6-6E0B-4909-8B21-434899A50A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1899AA65-3BD8-4B74-8A35-C4F6D341FF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1899AA65-3BD8-4B74-8A35-C4F6D341FF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1899AA65-3BD8-4B74-8A35-C4F6D341FF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1899AA65-3BD8-4B74-8A35-C4F6D341FF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A42D447A-0924-45E8-B473-B083E36549F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A42D447A-0924-45E8-B473-B083E36549F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A42D447A-0924-45E8-B473-B083E36549F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A42D447A-0924-45E8-B473-B083E36549F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7BEF77F6-6E0B-4909-8B21-434899A50A53} = {82622879-D661-4C95-A542-C170C25C4C94}
+		{1899AA65-3BD8-4B74-8A35-C4F6D341FF61} = {FD2C1179-F6EB-4B95-8737-1BFE499B8A8F}
+		{A42D447A-0924-45E8-B473-B083E36549F2} = {CE5CD0A9-95AC-455B-8E3C-CAF2084E5874}
+	EndGlobalSection
+EndGlobal
