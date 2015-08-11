@@ -98,7 +98,7 @@ namespace GFT.NetDeveloperPracticum.Tests
             var manager = new MealManager().Manager("morning,4");
             var result = manager.Menu;
 
-            Assert.IsFalse("Error" == result[0]);
+            Assert.IsTrue("Error" == result[0]);
         }
 
         [TestMethod]
@@ -107,8 +107,8 @@ namespace GFT.NetDeveloperPracticum.Tests
             var manager = new MealManager().Manager("morning,2,1,3");
             var result = manager.Menu;
 
-            Assert.IsTrue("Toast" == result[0]);
-            Assert.IsTrue("Eggs" == result[1]);
+            Assert.IsFalse("Toast" == result[0]);
+            Assert.IsFalse("Eggs" == result[1]);
             Assert.IsTrue("Coffee" == result[2]);
         }
 
@@ -119,9 +119,8 @@ namespace GFT.NetDeveloperPracticum.Tests
             var result = manager.Menu;
 
             Assert.IsTrue("Steak" == result[0]);
-            Assert.IsTrue("Potato" == result[1]);
-            Assert.IsTrue("Potato" == result[2]);
-            Assert.IsTrue("Cake" == result[3]);
+            Assert.IsFalse("Potato" == result[1]);
+            Assert.IsTrue("Cake" == result[2]);
         }
 
         [TestMethod]
@@ -132,9 +131,7 @@ namespace GFT.NetDeveloperPracticum.Tests
 
             Assert.IsTrue("Eggs" == result[0]);
             Assert.IsTrue("Toast" == result[1]);
-            Assert.IsTrue("Coffee" == result[2]);
-            Assert.IsTrue("Coffee" == result[3]);
-            Assert.IsTrue("Coffee" == result[4]);
+            Assert.IsFalse("Coffee" == result[2]);
         }
 
         [TestMethod]
@@ -143,7 +140,7 @@ namespace GFT.NetDeveloperPracticum.Tests
             Plan = "morning,1,2,3";
             var manager = MealPlan(Plan);
             var result = manager.Menu;
-            Assert.IsTrue("Coffee" == result.FirstOrDefault());
+            Assert.IsFalse("Coffee" == result.FirstOrDefault());
         }
 
         #endregion
