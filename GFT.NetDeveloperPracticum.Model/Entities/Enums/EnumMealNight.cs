@@ -1,6 +1,6 @@
 ﻿namespace GFT.NetDeveloperPracticum.Model.Entities.Enums
 {
-    public enum MealNight
+    public enum EnumMealNight
     {
         Steak = 1,
         Potato,

@@ -38,7 +38,8 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         {
             return new MealPlan
                    {
-                       Menu = FillMenuList(_mealType)
+                       Menu = FillMenuList(_mealType),
+                       TimeOfday = _mealType.ToString()
                    };
         }
 
@@ -52,7 +53,6 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             ICollection<string> menu = new List<string>();
 
             var aggrouped = GetAggroupedSummary();
-            int count = 0;
 
             foreach (var item in aggrouped)
             {
@@ -97,9 +97,9 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// <returns></returns>
         private static Enum GetDishName(dynamic dishTime, int value)
         {
-            return dishTime.GetType() == typeof(MealMorning)
-                ? (Enum)(MealMorning)value
-                : (MealNight)value;
+            return (EnumDishesTime)dishTime == EnumDishesTime.Morning
+                ? (Enum)(EnumMealMorning)value
+                : (EnumMealNight)value;
         }
     }
 }

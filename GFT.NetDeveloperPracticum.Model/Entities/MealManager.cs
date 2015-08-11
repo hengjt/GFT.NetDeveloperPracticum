@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GFT.NetDeveloperPracticum.Model.Entities.BussinessExceptions;
+using GFT.NetDeveloperPracticum.Model.Entities.Contracts;
 using GFT.NetDeveloperPracticum.Model.Entities.Enums;
 
 namespace GFT.NetDeveloperPracticum.Model.Entities
@@ -13,16 +14,25 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// </summary>
         #region Properties
 
-        public MealMorning MealMorning { get; set; }
+        public EnumMealMorning EnumMealMorning { get; set; }
 
-        public MealNight MealNight { get; set; }
+        public EnumMealNight EnumMealNight { get; set; }
 
         private List<int> _numbers;
 
         private string _scheduleMeal;
 
+        private EnumDishesTime _dishesTime; 
         #endregion
-        
+
+        private IScheduleStrategy _schedule;
+
+        public MealManager(IScheduleStrategy schedule, EnumDishesTime dishesTime)
+        {
+            _schedule = schedule;
+            _dishesTime = dishesTime;
+        }
+
         /// <summary>
         /// Method to check and call the factory class
         /// </summary>
@@ -39,24 +49,24 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             catch (Exception)
             {
                 throw new ExceptionBySyntax("Error: Incorrect syntax.");
-            }
+            }            
 
-            if (_scheduleMeal.Equals("morning", StringComparison.CurrentCultureIgnoreCase))
-            {
-                mealPlan = new MealFactory(MealMorning, _numbers).Create();
-                mealPlan.TimeOfday = "morning";
-            }
-            else if (_scheduleMeal.Equals("night", StringComparison.CurrentCultureIgnoreCase))
-            {
-                mealPlan = new MealFactory(MealNight, _numbers).Create();
-                mealPlan.TimeOfday = "night";
-            }
-            else
-            {
-                throw new ExceptionGeneric("Error: The inserted text is incorrect.");
-            }
+            //if (_scheduleMeal.Equals("morning", StringComparison.CurrentCultureIgnoreCase))
+            //{
+            //    mealPlan = new MealFactory(EnumMealMorning, _numbers).Create();
+            //    mealPlan.TimeOfday = EnumDishesTime.Morning.ToString();
+            //}
+            //else if (_scheduleMeal.Equals("night", StringComparison.CurrentCultureIgnoreCase))
+            //{
+            //    mealPlan = new MealFactory(EnumMealNight, _numbers).Create();
+            //    mealPlan.TimeOfday = EnumDishesTime.Night.ToString();
+            //}
+            //else
+            //{
+            //    throw new ExceptionGeneric("Error: The inserted text is incorrect.");
+            //}
 
-            return mealPlan;
+            return _schedule.Meal(_dishesTime, _numbers);
         }
 
         /// <summary>
@@ -66,14 +76,27 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         private void ConvertInputValues(string inputValue)
         {
             var values = inputValue.Split(',').ToList();
+            if (values.Count > 1)
+            {
+                _scheduleMeal = ConvertStringAndFillScheduleMeal(values[0]);
 
-            _scheduleMeal = values[0];
+                values.RemoveAt(0);
 
-            values.RemoveAt(0);
+                _numbers = new List<int>();
 
-            _numbers = new List<int>();
+                values.ForEach(p => _numbers.Add(int.Parse(p)));
+            }
+            else
+            {
+                throw new ExceptionGeneric("Error: The inserted text is incorrect.");
+            }
+        }
 
-            values.ForEach(p => _numbers.Add(int.Parse(p)));
+        private static string ConvertStringAndFillScheduleMeal(string t)
+        {
+            return t.Equals("morning", StringComparison.CurrentCultureIgnoreCase)
+                ? EnumDishesTime.Morning.ToString()
+                : EnumDishesTime.Night.ToString();
         }
     }
 }
