@@ -6,6 +6,11 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
 {
     public class MealTime
     {
+        /// <summary>
+        /// Compair and delegate the Input dish
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static EnumDishesTime GetTime(string text)
         {
             if (IsMorning(text))
@@ -21,12 +26,22 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             }            
         }
 
+        /// <summary>
+        /// Verify if the text it's night
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private static bool IsNight(string text)
         {
             return text.IndexOf(EnumDishesTime.Night.ToString(), 
                 StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
+        /// <summary>
+        /// Verify if the text it's day
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private static bool IsMorning(string text)
         {
             return text.IndexOf(EnumDishesTime.Morning.ToString(), 

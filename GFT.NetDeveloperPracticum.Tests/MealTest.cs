@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using GFT.NetDeveloperPracticum.Model;
 using GFT.NetDeveloperPracticum.Model.Entities;
+using GFT.NetDeveloperPracticum.Model.Entities.Contracts;
+using GFT.NetDeveloperPracticum.Model.Entities.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GFT.NetDeveloperPracticum.Tests
 {
-
     [TestClass]
     public class MealTest
     {
@@ -16,7 +18,7 @@ namespace GFT.NetDeveloperPracticum.Tests
         public void ShouldBeReturnedTheMorningDishList()
         {
             Plan = "morning,1,2,3";
-            var manager = MealPlan(Plan);
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
             Assert.IsTrue("Eggs" == result[0]);
             Assert.IsTrue("Toast" == result[1]);
@@ -26,7 +28,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedMorningCorrectOrder()
         {
-            var manager = new MealManager().Manager("morning,2,1,3");
+            Plan = "morning,2,1,3";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Eggs" == result[0]);
@@ -37,8 +40,10 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedErrorMorningDessert()
         {
-            var manager = new MealManager().Manager("morning,1,2,3,4");
+            Plan = "morning,1,2,3,4";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
+
             Assert.IsTrue("Eggs" == result[0]);
             Assert.IsTrue("Toast" == result[1]);
             Assert.IsTrue("Coffee" == result[2]);
@@ -48,7 +53,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedRepeatMorning()
         {
-            var manager = new MealManager().Manager("morning,1,2,3,3,3");
+            Plan = "morning,1,2,3,3,3";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Eggs" == result[0]);
@@ -60,7 +66,7 @@ namespace GFT.NetDeveloperPracticum.Tests
         public void ShouldBeReturnedTheNightDishList()
         {
             Plan = "night,1,2,3,4";
-            var manager = MealPlan(Plan);
+            var manager = MealPlan(new NightMeal(), EnumDishesTime.Night, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Steak" == result[0]);
@@ -73,7 +79,7 @@ namespace GFT.NetDeveloperPracticum.Tests
         public void ShouldBeReturnedTheNightDishListMoreTime()
         {
             Plan = "night,1,2,3,3";
-            var manager = MealPlan(Plan);
+            var manager = MealPlan(new NightMeal(), EnumDishesTime.Night, Plan);
             var result = manager.Menu;
 
             Assert.IsFalse("Potato" == result[0]);
@@ -84,7 +90,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedRepeatNight()
         {
-            var manager = new MealManager().Manager("night,1,2,2,4");
+            Plan = "night,1,2,2,4";
+            var manager = MealPlan(new NightMeal(), EnumDishesTime.Night, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Steak" == result[0]);
@@ -95,7 +102,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedFailureDessertMorning()
         {
-            var manager = new MealManager().Manager("morning,4");
+            Plan = "morning,4";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Error" == result[0]);
@@ -104,7 +112,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedMorningFailureOrder()
         {
-            var manager = new MealManager().Manager("morning,2,1,3");
+            Plan = "morning,2,1,3";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
 
             Assert.IsFalse("Toast" == result[0]);
@@ -115,7 +124,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedFailureRepeatNightDishesError()
         {
-            var manager = new MealManager().Manager("night,1,2,2,4");
+            Plan = "night,1,2,2,4";
+            var manager = MealPlan(new NightMeal(), EnumDishesTime.Night, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Steak" == result[0]);
@@ -126,7 +136,8 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedFailureRepeatMorning()
         {
-            var manager = new MealManager().Manager("morning,1,2,3,3,3");
+            Plan = "morning,1,2,3,3,3";
+            var manager = MealPlan(new MorningMeal(), EnumDishesTime.Morning, Plan);
             var result = manager.Menu;
 
             Assert.IsTrue("Eggs" == result[0]);
@@ -137,9 +148,10 @@ namespace GFT.NetDeveloperPracticum.Tests
         [TestMethod]
         public void ShouldBeReturnedFailureTheMorningDishList()
         {
-            Plan = "morning,1,2,3";
-            var manager = MealPlan(Plan);
+            Plan = "morning,1,2,3,3,3";
+            var manager = MealPlan(new NightMeal(), EnumDishesTime.Night, Plan);
             var result = manager.Menu;
+
             Assert.IsFalse("Coffee" == result.FirstOrDefault());
         }
 
@@ -150,9 +162,9 @@ namespace GFT.NetDeveloperPracticum.Tests
         /// </summary>
         /// <param name="plan"></param>
         /// <returns></returns>
-        private static MealPlan MealPlan(string plan)
+        private static MealPlan MealPlan(IScheduleStrategy schedule, EnumDishesTime dishesTime, string plan)
         {
-            var manager = new MealManager().Manager(plan);
+            var manager = new MealManager(schedule, dishesTime).Manager(plan);
             return manager;
         }
 

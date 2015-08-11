@@ -50,7 +50,7 @@
     <Compile Include="Entities\BussinessExceptions\ExceptionBySyntax.cs" />
     <Compile Include="Entities\MealTime.cs" />
     <Compile Include="Entities\NightMeal.cs" />
-    <Compile Include="MorningMeal.cs" />
+    <Compile Include="Entities\MorningMeal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Summary.cs" />
   </ItemGroup>
