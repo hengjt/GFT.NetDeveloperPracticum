@@ -22,7 +22,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
 
         private string _scheduleMeal;
 
-        private EnumDishesTime _dishesTime; 
+        private EnumDishesTime _dishesTime;
         #endregion
 
         private IScheduleStrategy _schedule;
@@ -40,8 +40,6 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// <returns></returns>
         public MealPlan Manager(string inputValue)
         {
-            MealPlan mealPlan = null;
-
             try
             {
                 ConvertInputValues(inputValue);
@@ -49,22 +47,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             catch (Exception)
             {
                 throw new ExceptionBySyntax("Error: Incorrect syntax.");
-            }            
-
-            //if (_scheduleMeal.Equals("morning", StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    mealPlan = new MealFactory(EnumMealMorning, _numbers).Create();
-            //    mealPlan.TimeOfday = EnumDishesTime.Morning.ToString();
-            //}
-            //else if (_scheduleMeal.Equals("night", StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    mealPlan = new MealFactory(EnumMealNight, _numbers).Create();
-            //    mealPlan.TimeOfday = EnumDishesTime.Night.ToString();
-            //}
-            //else
-            //{
-            //    throw new ExceptionGeneric("Error: The inserted text is incorrect.");
-            //}
+            }
 
             return _schedule.Meal(_dishesTime, _numbers);
         }
