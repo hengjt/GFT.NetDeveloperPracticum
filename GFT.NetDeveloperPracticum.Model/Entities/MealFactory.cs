@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using GFT.NetDeveloperPracticum.Model.Entities.DomainServices;
 using GFT.NetDeveloperPracticum.Model.Entities.Enums;
 
 namespace GFT.NetDeveloperPracticum.Model.Entities
@@ -30,6 +30,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             _listMealTypes = mealtypes;
         }
 
+        #region MealFactory Methods
         /// <summary>
         /// Factory Method to create the list
         /// </summary>
@@ -48,7 +49,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// </summary>
         /// <param name="mealTime"></param>
         /// <returns></returns>
-        private ICollection<string> FillMenuList(dynamic mealTime)
+        private ICollection<string> FillMenuList(EnumDishesTime mealTime)
         {
             ICollection<string> menuList = new List<string>();
 
@@ -58,16 +59,16 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             {
                 object dishName;
 
-                if (((mealTime.ToString().Equals("Morning") && item.Value == 3) ||
-                        (mealTime.ToString().Equals("Night") && item.Value == 2)) &&
-                            item.Amount > 1)
+                if ((MealServices.IsMorningAndDishTypeIsCoffee(mealTime, item.Value)
+                        || (MealServices.IsNightAndDishTypeIsPotato(mealTime, item.Value)))
+                        && item.Amount > 1)
                 {
                     dishName = GetDishName(mealTime, item.Value);
 
                     var concDishAmount = dishName + "(" + item.Amount + "X)";
                     menuList.Add(concDishAmount);
                 }
-                else if (item.Value < 5)
+                else if (MealServices.IsNotCorrectDish(item.Value))
                 {
                     dishName = GetDishName(mealTime, item.Value);
                     menuList.Add(dishName.ToString());
@@ -103,5 +104,6 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
                 ? (Enum)(EnumMealMorning)value
                 : (EnumMealNight)value;
         }
+        #endregion
     }
 }

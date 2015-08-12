@@ -2,13 +2,7 @@
 {
     public class Summary
     {
-        /// <summary>
-        /// Class Properties
-        /// </summary>
-        /// 
-        /// 
-        
-        #region Properties
+        #region Summary Properties
 
         public int Value { get; set; }
 

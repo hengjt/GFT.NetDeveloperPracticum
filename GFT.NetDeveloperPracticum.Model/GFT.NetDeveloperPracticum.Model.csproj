@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Entities\BussinessExceptions\ExceptionGeneric.cs" />
     <Compile Include="Entities\Contracts\IScheduleStrategy.cs" />
+    <Compile Include="Entities\DomainServices\MealServices.cs" />
     <Compile Include="Entities\Enums\EnumDishesTime.cs" />
     <Compile Include="Entities\MealManager.cs" />
     <Compile Include="Entities\MealFactory.cs" />

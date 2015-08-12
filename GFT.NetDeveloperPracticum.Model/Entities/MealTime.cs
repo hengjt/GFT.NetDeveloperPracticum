@@ -26,6 +26,8 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             }            
         }
 
+        #region MealTime Methods
+
         /// <summary>
         /// Verify if the text it's night
         /// </summary>
@@ -33,7 +35,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// <returns></returns>
         private static bool IsNight(string text)
         {
-            return text.IndexOf(EnumDishesTime.Night.ToString(), 
+            return text.IndexOf(EnumDishesTime.Night.ToString(),
                 StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
 
@@ -44,8 +46,11 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// <returns></returns>
         private static bool IsMorning(string text)
         {
-            return text.IndexOf(EnumDishesTime.Morning.ToString(), 
+            return text.IndexOf(EnumDishesTime.Morning.ToString(),
                 StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
+
+        #endregion
+
     }
 }

@@ -22,16 +22,23 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
 
         private string _scheduleMeal;
 
-        private EnumDishesTime _dishesTime;
+        private readonly EnumDishesTime _dishesTime;
+
+        private readonly IScheduleStrategy _schedule;
         #endregion
 
-        private IScheduleStrategy _schedule;
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <param name="dishesTime"></param>
         public MealManager(IScheduleStrategy schedule, EnumDishesTime dishesTime)
         {
             _schedule = schedule;
             _dishesTime = dishesTime;
         }
+
+        #region Mealmanager Methods
 
         /// <summary>
         /// Method to check and call the factory class
@@ -75,11 +82,19 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             }
         }
 
-        private static string ConvertStringAndFillScheduleMeal(string t)
+        /// <summary>
+        /// String Conversion method fo Enum 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private static string ConvertStringAndFillScheduleMeal(string text)
         {
-            return t.Equals("morning", StringComparison.CurrentCultureIgnoreCase)
+            return text.Equals("morning", StringComparison.CurrentCultureIgnoreCase)
                 ? EnumDishesTime.Morning.ToString()
                 : EnumDishesTime.Night.ToString();
         }
+
+        #endregion
+
     }
 }
