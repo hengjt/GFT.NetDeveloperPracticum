@@ -50,7 +50,7 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
         /// <returns></returns>
         private ICollection<string> FillMenuList(dynamic mealTime)
         {
-            ICollection<string> menu = new List<string>();
+            ICollection<string> menuList = new List<string>();
 
             var aggrouped = GetAggroupedSummary();
 
@@ -58,21 +58,23 @@ namespace GFT.NetDeveloperPracticum.Model.Entities
             {
                 object dishName;
 
-                if (item.Amount > 1 && item.Value < 5)
+                if (((mealTime.ToString().Equals("Morning") && item.Value == 3) ||
+                        (mealTime.ToString().Equals("Night") && item.Value == 2)) &&
+                            item.Amount > 1)
                 {
                     dishName = GetDishName(mealTime, item.Value);
 
                     var concDishAmount = dishName + "(" + item.Amount + "X)";
-                    menu.Add(concDishAmount);
+                    menuList.Add(concDishAmount);
                 }
                 else if (item.Value < 5)
                 {
                     dishName = GetDishName(mealTime, item.Value);
-                    menu.Add(dishName.ToString());
+                    menuList.Add(dishName.ToString());
                 }
             }
 
-            return menu;
+            return menuList;
         }
 
         /// <summary>
